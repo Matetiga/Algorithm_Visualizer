@@ -1,0 +1,20 @@
+.array-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 500px;
+}
+
+.array-bar {
+  width: 50px;
+  background-color: turquoise;
+  margin: 0 1px;
+  display: inline-block;
+}
+
+.bar-container{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 0 5px;
+}
