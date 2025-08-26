@@ -22,6 +22,7 @@ export function bubbleSortAnimations(array){
                 // maybe add a NewHight property so the hights of the columns can be updated
                 animations.push({type: 'swap', indices: [n, n+1]})
             }
+            animations.push({type: 'reset', indices: [n, n+1]});
         }
 
         if(!swap){
@@ -29,6 +30,6 @@ export function bubbleSortAnimations(array){
         }
     }
 
-    return array;
+    return animations;
 }
 //module.exports = {bubbleSortAnimations};
