@@ -29,6 +29,8 @@ export default function SortingVisualizer(){
         setArray(sortedArray);
     }
 
+    const currentArray = [...array];
+
 
 
     // Logic for the animations
@@ -42,7 +44,6 @@ export default function SortingVisualizer(){
         const animations = bubbleSortAnimations([...array]);
         const bars = document.getElementsByClassName('array-bar');
 
-        // TODO : watch out the -1
         for(let i = 0; i < animations.length ; i++){
 
             const {type, indices} = animations[i];
@@ -62,10 +63,15 @@ export default function SortingVisualizer(){
             if(type === 'swap'){
                 await new Promise(resolve => setTimeout(() => {
                     // change the height between the columns
-                    let helper = bars[leftBar].style.height;
-                    bars[leftBar].style.height = bars[rightBar].style.height; 
-                    bars[rightBar].style.height = helper;
+                    // let helper = bars[leftBar].style.height;
+                    // bars[leftBar].style.height = bars[rightBar].style.height; 
+                    // bars[rightBar].style.height = helper;
     
+                    let helper = currentArray[leftBar];
+                    currentArray[leftBar] = currentArray[rightBar];
+                    currentArray[rightBar] = helper;
+                    setArray([...currentArray]);
+
                     resolve();
                 }, ANIMATION_SPEED));
             }
