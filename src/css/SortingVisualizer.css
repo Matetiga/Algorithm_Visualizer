@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  height: 500px;
+  height: 550px;
 }
 
 .array-bar {
@@ -10,6 +10,7 @@
   background-color: turquoise;
   margin: 0 1px;
   display: inline-block;
+  transition: transform 0.5s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .bar-container{

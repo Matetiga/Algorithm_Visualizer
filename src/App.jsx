@@ -6,6 +6,7 @@ function App() {
 
   return (
     <>
+      <div className="gradient-title"> Bubble Sort </div>
       <div>
         <SortingVisualizer />
       </div> 
