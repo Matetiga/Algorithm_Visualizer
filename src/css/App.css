@@ -1,8 +1,7 @@
 #root {
-  max-width: 3000px;
-  margin: 0 auto;
+  /* max-width: 3000px; */
+  /* margin: 0 auto; */
   padding: 2rem;
-  text-align: center;
 }
 
 
@@ -16,8 +15,8 @@ body {
     /* gradient from grey to black to grey */
     background: linear-gradient(
         to right,       /* Gradient direction */
-        #333,           
-        #000 25%,       
+        /* #333,            */
+        /* #000 25%,        */
         #000 75%,       
         #333            
     );
@@ -27,7 +26,7 @@ body {
 
 
 .gradient-title {
-    font-size: 200px;
+    font-size: 250px;
     
     font-weight: bold;
     margin: 0;
@@ -43,4 +42,11 @@ body {
             background-clip: text;
 
     color: transparent;
+    text-align: left;
+}
+
+.display{
+  text-align: center;
+  display: flex;
+  place-items: center;
 }

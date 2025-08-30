@@ -108,7 +108,7 @@ export default function SortingVisualizer(){
     }
 
     return (
-       <div>
+       <div className="bubbleSort">
             <div className="array-container">
                 {array.map((value, key) =>(
                     <div className="bar-container">
@@ -122,8 +122,11 @@ export default function SortingVisualizer(){
                 </div>
                 ))}
             </div>
-            <button onClick={resetArray}> Generate new values </button>
-            <button onClick={bubbleSort}> Sort the Array </button>
+            <div>
+                <button onClick={resetArray}> Generate new values </button>
+                <button onClick={bubbleSort}> Sort the Array </button>
+                <p>How it works</p>
+            </div>
         </div>
     );                                                                                                                  
 }

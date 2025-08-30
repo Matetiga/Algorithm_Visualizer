@@ -19,3 +19,9 @@
    align-items: center;
    margin: 0 5px;
 }
+
+.bubbleSort{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
