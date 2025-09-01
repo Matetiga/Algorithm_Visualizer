@@ -1,4 +1,4 @@
-function bubbleSortAnimations(array){
+export function bubbleSortAnimations(array){
     let animations = [];
     
     // bubble sort logic    
@@ -32,4 +32,4 @@ function bubbleSortAnimations(array){
 
     return animations;
 }
-module.exports = {bubbleSortAnimations};
+//module.exports = {bubbleSortAnimations};

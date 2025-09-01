@@ -1,4 +1,4 @@
-function mergeSortAnimations(array){
+export function mergeSortAnimations(array){
 
     const animations = [];
     animations.push({
@@ -66,8 +66,8 @@ function mergeArrays(leftArray, rightArray,level, animations){
     animations.push({
         type: 'merge',
         level: level +1,
-        arrays: [mergedArray]
+        array: [mergedArray]
     });
-    return mergedArray;
+    return animations;
 }
-module.exports = {mergeSortAnimations};
+//module.exports = {mergeSortAnimations};

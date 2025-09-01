@@ -1,0 +1,56 @@
+/* /src/components/MergeSortVisualizer.css */
+
+.visualizer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.levels-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.level {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 30px; /* Space between levels */
+  min-height: 50px; /* Ensure level takes space even if empty */
+}
+
+.merge-array-container {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  margin: 0 20px; /* Space between arrays on the same level */
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.merge-array-box {
+  /* Box Dimensions */
+  width: 50px;
+  height: 50px;
+  margin: 0 3px;
+  
+  /* Centering the Number */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Styling */
+  background-color: #61dafb;
+  border: 1px solid #4a9fb3;
+  border-radius: 4px;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+}
