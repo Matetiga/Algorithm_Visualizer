@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, captureOwnerStack } from "react";
 import { mergeSortAnimations } from "./algorithms/mergeSort";
 import './css/MergeSortVisualizer.css'
 
@@ -13,12 +13,11 @@ export default function MergeSortVisualizer(){
     const resetArray = () =>{
 
         const newArray = [];
-        for(let i = 0; i < 12; i++){
-            newArray.push(Math.floor(Math.random() * 100));
+        for(let i = 0; i <16; i++){
+            newArray.push(Math.floor(Math.random() * 200));
         }
 
         setInitialArray(newArray);
-        console.log(newArray);
         setDisplayLevels({})
     }
 
@@ -26,40 +25,70 @@ export default function MergeSortVisualizer(){
         resetArray();
     }, []);
 
-    const mergeSort = () =>{
+    const mergeSort = async () =>{
         setIsSorting(true);
         const animation = mergeSortAnimations([...initialArray]);
 
-    
-
             for(let i = 0; i < animation.length; i++){
-                setTimeout(() =>{
-                    let step = animation[i];
 
-                    setDisplayLevels(prevLevels => {
-                        let newLevels = {...prevLevels};
-                        let {type, level, arrays, array} = step;
-                        // if(type === "divide"){
-                        //     newLevels[level] = [...(newLevels[level] || []), ...array];
-                        //     console.log(newLevels[level]);
-                        // }
-                        console.log(step);
-                        // all the levels that are to be displayed (added one by one)
-                        // let newLevels = {...prevLevels};
-                        // console.log(newLevels);
+              await new Promise(resolve => setTimeout(() =>{
+                  let step = animation[i];  
 
+                  console.log("current step ", step);
+                  setDisplayLevels(prevLevels => {
+                    let newLevels = {...prevLevels};
+                    let {type, level, arrays, array} = step;
 
-                        // if(type === 'divide'){
-                        //     newLevels[level] = [...(newLevels[level] || []), ...arrays];
+                    if(type === "divide"){
+                      newLevels[level] = [...(newLevels[level] || []), ...arrays];
+                      console.log("Array by divide, ", newLevels[level]);
 
-                        // }else if (type === 'merge'){
+                    }else if(type === "merge"){
+                      console.log("working at level : ", level);
+                      let toRemoveElements = []; 
+                      for(let n = 0; n < newLevels[level].length; n++){
+                        const containerArray = newLevels[level][n];
+                        console.log("container array ", containerArray);
+                        console.log("the array ", array);
 
-                        // }
-                        return newLevels;
-                    });
-                }, 10);
+                        // we only have to check the arrays that are smaller than 'array'
+                        if(array.length <= containerArray.length) continue;
+
+                        // this will check each individual array inside the level
+                        // that is smaller than 'array'
+                        console.log("testing the array", array);
+                        for(let j = 0; j < containerArray.length ; j++){
+                          console.log("testing element in container ", containerArray[j]);
+                          if(array.includes(containerArray[j])){
+                            // this will append the index of the array that is a child of 'array'
+                            toRemoveElements.push(n);
+                            break;
+                          }
+                        }
+                        // this two elements will be the children arrays 
+                        // that created the merged 'array'
+                        if(toRemoveElements.length === 2){
+                          // this will exclude the child (indices) that made the 'array'
+                          const filteredLevel = newLevels[level].filter((_, index) => 
+                            !toRemoveElements.includes(index)
+                          );
+                          const updatedLevel = [...filteredLevel, array];
+                          newLevels[level] = updatedLevel;
+                          break;
+                        }
+
+                      }
+
+                    }
+        
+                      
+                      return newLevels;
+                  });
+                    resolve();
+                }, 1000));
+              
+              setIsSorting(false);
             }
-        setIsSorting(false);
     
     };
 
@@ -72,7 +101,7 @@ export default function MergeSortVisualizer(){
       <div className="levels-container">
         {Object.keys(displayLevels).sort().map(level => (
           <div key={level} className="level">
-            {displayedLevels[level].map((arr, arrIdx) => (
+            {displayLevels[level].map((arr, arrIdx) => (
               <div key={arrIdx} className="merge-array-container">
                 {arr.map((value, valIdx) => (
                   <div key={valIdx} className="merge-array-box">

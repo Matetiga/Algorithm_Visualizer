@@ -1,6 +1,6 @@
+const animations = [];
 export function mergeSortAnimations(array){
 
-    const animations = [];
     animations.push({
         type: 'divide',
         level: 0,
@@ -9,15 +9,17 @@ export function mergeSortAnimations(array){
     })
 
     // this passes a copy of the array
-    return mergeSortHelper(array.slice(), 0, animations);
-    //return animations;
+    mergeSortHelper(array.slice(), 0, animations);
+    return animations;
+
 }
 
-function mergeSortHelper(array, level, animations ){
+function mergeSortHelper(array, level,  animations ){
 
     // Divide the arrays until there is only one element on it
-    if(array.length <= 1) return array;
-    
+    if(array.length <= 1) {
+        return array;
+    }    
     // Divide both arrays in half
     const arr_length = array.length;
     const leftArray = array.slice(0, Math.floor(arr_length/2));
@@ -66,8 +68,8 @@ function mergeArrays(leftArray, rightArray,level, animations){
     animations.push({
         type: 'merge',
         level: level +1,
-        array: [mergedArray]
+        array: mergedArray
     });
-    return animations;
+    return mergedArray;
 }
 //module.exports = {mergeSortAnimations};
