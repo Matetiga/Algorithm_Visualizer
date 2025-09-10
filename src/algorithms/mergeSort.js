@@ -1,48 +1,57 @@
 const animations = [];
+let nextId = 0;
 export function mergeSortAnimations(array){
+    nextId = 0; // this will reset the counter each sort 
 
-    animations.push({
-        type: 'divide',
-        level: 0,
-        arrays: [array.slice()], 
-
-    })
+    const initialArrayObject = {
+        id: `0-${nextId++}`,
+        values : array.slice(),
+    };
 
     // this passes a copy of the array
-    mergeSortHelper(array.slice(), 0, animations);
+    mergeSortHelper(initialArrayObject, 0, animations);
     return animations;
 
 }
 
-function mergeSortHelper(array, level,  animations ){
+function mergeSortHelper(arrayObject, level,  animations ){
+    const {id: parentId, values} = arrayObject;
+    
 
     // Divide the arrays until there is only one element on it
-    if(array.length <= 1) {
-        return array;
+    if(values.length <= 1) {
+        return arrayObject;
     }    
     // Divide both arrays in half
-    const arr_length = array.length;
-    const leftArray = array.slice(0, Math.floor(arr_length/2));
-    const rightArray = array.slice(Math.floor(arr_length/2),arr_length);
+    const mid = Math.floor(values.length/2);
+    const leftArray = values.slice(0, mid); // mid not included
+    const rightArray = values.slice(mid); // from mid to end
+
+    // objects will have the next nextId and then increase it by 1
+    const leftArrayObject = {id: `${level + 1}-${nextId++}`, values: leftArray};
+    const rightArrayObject = {id: `${level + 1}-${nextId++}`, values: rightArray};
 
     animations.push({
         type: 'divide',
         level: level + 1,
-        arrays : [leftArray, rightArray],
+        arrays : [leftArrayObject, rightArrayObject],
+        parentId : parentId, // children will be linked to parent 
     });
 
     // recursive call
-    const leftArrRecursive = mergeSortHelper(leftArray, level + 1, animations);
-    const rightArrRecursive = mergeSortHelper(rightArray, level + 1, animations);
+    const leftArrRecursive = mergeSortHelper(leftArrayObject, level + 1, animations);
+    const rightArrRecursive = mergeSortHelper(rightArrayObject, level + 1, animations);
 
-
-    return mergeArrays(leftArrRecursive, rightArrRecursive, level, animations);
+    return mergeArrays(leftArrRecursive, rightArrRecursive, level, animations, leftArrayObject.id, rightArrayObject.id);
 }
 
 // This merge back the arrays (sorted)
-function mergeArrays(leftArray, rightArray,level, animations){
+function mergeArrays(leftArrayObject, rightArrayObject,level, animations, ogLeftId, ogRightId){
     
     const mergedArray = [];
+    const leftArray = leftArrayObject.values;
+    const rightArray = rightArrayObject.values;
+
     let i = 0, j = 0;
     while( i < leftArray.length && j < rightArray.length ){
         if(leftArray[i] < rightArray[j]){
@@ -65,11 +74,18 @@ function mergeArrays(leftArray, rightArray,level, animations){
         j++
     }
 
+    // IMPORTANTE revisar el +1 de los level
+    const mergedArrayObject = {
+            id: `m-${level + 1}-${nextId++}`,
+            values: mergedArray,
+        };
+
     animations.push({
         type: 'merge',
         level: level +1,
-        array: mergedArray
+        array: mergedArrayObject,
+        childIds: [ogLeftId, ogRightId],
     });
-    return mergedArray;
+    return mergedArrayObject;
 }
 //module.exports = {mergeSortAnimations};

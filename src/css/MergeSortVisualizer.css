@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  min-height: 700px;
 }
 
 .controls {
@@ -18,21 +19,22 @@
 }
 
 .level {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  position: relative;
+  width: 100%;
   margin-bottom: 30px; /* Space between levels */
   min-height: 50px; /* Ensure level takes space even if empty */
 }
 
 .merge-array-container {
+  position: absolute;
   display: flex;
   align-items: flex-end;
   padding: 10px;
-  margin: 0 20px; /* Space between arrays on the same level */
   border: 1px solid #ccc;
   background-color: #f9f9f9;
   border-radius: 4px;
+
+  transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 .merge-array-box {
@@ -47,7 +49,7 @@
   justify-content: center;
   
   /* Styling */
-  background-color: #61dafb;
+  background-color: transparent;
   border: 1px solid #4a9fb3;
   border-radius: 4px;
   color: black;
