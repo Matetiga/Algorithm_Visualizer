@@ -100,29 +100,47 @@ export default function MergeSortVisualizer(){
     };
 
   return (
-    <div className="visualizer-container">
-      <div className="controls">
-        <button onClick={resetArray} disabled={isSorting}>New Array</button>
-        <button onClick={mergeSort} disabled={isSorting}>Merge Sort</button>
+    <div className="sorting-visualizer">
+      <div className="left-section">
+        <p className="explanation">
+          <ul>
+            <li>This algorithm recursively halves an array into smaller subarrays, sorts them 
+            and then merges them back together. The formed structure resemlbes a binary tree.</li>
+            <li>Fist it splits the array into two halves until 
+            each subarray contains a single element (which is inherently sorted)</li>
+            <li>Each subarray pair is merged back together by comparing and sorting their values</li>
+            <li>This happens recursively until everything is united into one whole array</li>
+            <li>Time complexity of O(n log n), making it reliable for large datasets, 
+            though it requires additional space for merging</li>
+          </ul>
+        </p>
       </div>
-      <div className="levels-container">
-        {Object.keys(displayLevels).sort((a, b) => a-b).map(level => (
-          <div key={level} className="level">
-            {displayLevels[level].map((arr) => (
-              <div 
-                key={arr.id} 
-                className="merge-array-container"
-                style = {{left: `${arr.offset}px`, width: `${arr.width}px`}}
-              >
-                {arr.values.map((value, valIdx) => (
-                  <div key={valIdx} className="merge-array-box">
-                    {value}
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        ))}
+      <div className="middle-section">
+        <div className="controls">
+          <button onClick={resetArray} disabled={isSorting}>New Array</button>
+          <button onClick={mergeSort} disabled={isSorting}>Merge Sort</button>
+        </div>
+      </div>
+      <div className="right-section">
+        <div className="levels-container">
+          {Object.keys(displayLevels).sort((a, b) => a-b).map(level => (
+            <div key={level} className="level">
+              {displayLevels[level].map((arr) => (
+                <div 
+                  key={arr.id} 
+                  className="merge-array-container"
+                  style = {{left: `${arr.offset}px`, width: `${arr.width}px`}}
+                >
+                  {arr.values.map((value, valIdx) => (
+                    <div key={valIdx} className="merge-array-box">
+                      {value}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

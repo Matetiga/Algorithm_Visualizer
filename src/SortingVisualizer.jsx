@@ -2,6 +2,9 @@ import React, {useState, useEffect} from "react";
 import './css/SortingVisualizer.css';
 import { bubbleSortAnimations } from "./algorithms/bubbleSort";
 
+const ACCENT_COLOR = '#5F80D9'
+const PRIMARY_COLOR = '#78D3D6'
+
 export default function SortingVisualizer(){
     // React hook that returns an array with two elements: the state variable and the setter function
     // when the (state variable) value changes, the page will trigger a re-render
@@ -14,6 +17,9 @@ export default function SortingVisualizer(){
     
     // Generate an array with random numbers between 5 and 500
     const resetArray = () =>{
+        // disable the button if sorting
+        if(isSorting) return;
+
         const newArray = [];
 
         for(let i = 0; i < 10; i++){
@@ -47,7 +53,7 @@ export default function SortingVisualizer(){
             const rightBar = bars[rightBarIndex];
             if(type === 'compare' || type === 'reset'){
                 // this will change the colors of the bar depending on the animation
-                let color = type === 'compare' ? 'red' : 'turquoise';
+                let color = type === 'compare' ? ACCENT_COLOR : PRIMARY_COLOR;
                
                 await new Promise(resolve => setTimeout(() =>{
                     leftBar.style.backgroundColor = color;
@@ -108,25 +114,36 @@ export default function SortingVisualizer(){
     }
 
     return (
-       <div className="bubbleSort">
-            <div className="array-container">
-                {array.map((value, key) =>(
-                    <div className="bar-container">
-                    <div
-                        className="array-bar"
-                        key={key}
-                        style={{height:`${value}px`}}>
-                    
+       <div className="sorting-visualizer">
+            <div className="left-section">
+                <div className="array-container">
+                    {array.map((value, key) =>(
+                        <div className="bar-container" key={key}>
+                        <div
+                            className="array-bar"
+                            style={{height:`${value}px`}}>
+                        </div>
+                        <span className="bar-label">{value}</span>
                     </div>
-                    <p>{value}</p>
+                    ))}
                 </div>
-                ))}
             </div>
-            <div>
-                <button onClick={resetArray}> Generate new values </button>
-                <button onClick={bubbleSort}> Sort the Array </button>
-                <p>How it works</p>
+            <div className="middle-section">
+                <div className="controls">
+                    <button onClick={resetArray} disabled={isSorting}>New Values</button>
+                    <button onClick={bubbleSort} disabled={isSorting}>Bubble Sort</button>
+                </div>
             </div>
+            <div className="right-section">
+                <p className="explanation">
+                    Bubble Sort repeatedly steps through the list, compares adjacent elements 
+                    and swaps them if they are in the wrong order. The pass through the list 
+                    is repeated until the list is sorted. The algorithm gets its name from 
+                    the way smaller elements "bubble" to the top of the list. Whit an average of 
+                    O(n^2) time.
+                </p>
+            </div>
+
         </div>
     );                                                                                                                  
 }
