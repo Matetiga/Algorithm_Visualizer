@@ -15,6 +15,7 @@ h2 {
   align-items: center;
   gap: 1.5rem;
   margin-top: 25px;
+  margin-bottom: 100px;
 }
 
 .gradient-title {
@@ -143,4 +144,35 @@ h2 {
     flex: 2;
     display: flex;
     align-items: center;
+}
+
+.right-section.merge-Sort{
+  margin-top: 3rem;
+}
+
+.additional-explanation{
+  font-size: 1.2rem;
+  color: var(--light-gray);
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 2rem;
+  padding: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.additional-explanation.merge-Sort{
+  margin-top: 100px;
+}
+
+.additional-explanation.animate-in{
+  animation: fadeInDown 1s ease-out forwards;
+}
+
+strong{
+  color: var(--text-color);
 }

@@ -103,16 +103,11 @@ export default function MergeSortVisualizer(){
     <div className="sorting-visualizer">
       <div className="left-section">
         <p className="explanation">
-          <ul>
-            <li>This algorithm recursively halves an array into smaller subarrays, sorts them 
-            and then merges them back together. The formed structure resemlbes a binary tree.</li>
-            <li>Fist it splits the array into two halves until 
-            each subarray contains a single element (which is inherently sorted)</li>
-            <li>Each subarray pair is merged back together by comparing and sorting their values</li>
-            <li>This happens recursively until everything is united into one whole array</li>
-            <li>Time complexity of O(n log n), making it reliable for large datasets, 
-            though it requires additional space for merging</li>
-          </ul>
+            This divide-and-conquer algorithm recursively halves an array into smaller subarrays,
+            sorts them and merges them back together within an average of O(n log n), which means 
+            it performs good on larger datasets.
+            <br/>
+            The formed structure resembles a binary tree
         </p>
       </div>
       <div className="middle-section">
@@ -121,7 +116,7 @@ export default function MergeSortVisualizer(){
           <button onClick={mergeSort} disabled={isSorting}>Merge Sort</button>
         </div>
       </div>
-      <div className="right-section">
+      <div className="right-section merge-Sort">
         <div className="levels-container">
           {Object.keys(displayLevels).sort((a, b) => a-b).map(level => (
             <div key={level} className="level">
@@ -142,6 +137,7 @@ export default function MergeSortVisualizer(){
           ))}
         </div>
       </div>
+
     </div>
   );
 

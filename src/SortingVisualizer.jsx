@@ -143,7 +143,6 @@ export default function SortingVisualizer(){
                     O(n^2) time.
                 </p>
             </div>
-
         </div>
     );                                                                                                                  
 }
