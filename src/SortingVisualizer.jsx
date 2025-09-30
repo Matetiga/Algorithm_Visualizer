@@ -23,7 +23,7 @@ export default function SortingVisualizer(){
         const newArray = [];
 
         for(let i = 0; i < 10; i++){
-            newArray.push(Math.floor(Math.random() * 500 ));
+            newArray.push(Math.floor(Math.random() * 490 ) + 10);
         }
         setArray(newArray);
     };

@@ -44,6 +44,7 @@ h2 {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out 0.3s, transform 0.8s ease-out 0.3s;
+    min-height: 550px;
     width: 100%;
 }
 
@@ -52,13 +53,17 @@ h2 {
     transform: translateY(0);
 }
 
-/* Keep the bubble sort title always visible */
-.gradient-title.left-aligned {
+.gradient-title.bubble-sort {
     text-align: left;
     align-self: flex-start;
     opacity: 1;
     transform: translateY(0);
     animation: fadeInDown 1s ease-out forwards;
+}
+
+.gradient-title.left-aligned {
+    text-align: left;
+    align-self: flex-start;
 }
 
 .gradient-title.right-aligned {
@@ -125,12 +130,12 @@ h2 {
     width: 100%;
     gap: 2rem;
     align-items: center;
+    min-height: 550px;
 }
 
 .left-section {
     flex: 2;
     display: flex;
-    justify-content: center;
 }
 
 .middle-section {
