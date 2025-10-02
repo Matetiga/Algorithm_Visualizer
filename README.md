@@ -1,2 +1,12 @@
 # Algorithm Visualizer Project 
-With the main goal of making sort algorithms understandable by creating a visual representation of them 
+The goal of this proyect is to make sorting algorithms easier to understand trough visual representation.
+Each Algorithm is animated and provides a brief explanation of how it works. 
+Later, there is more profound information.
+
+## Bubble Sort 
+![]
+
+## Merge Sort 
+
+## Heap Sort
+
